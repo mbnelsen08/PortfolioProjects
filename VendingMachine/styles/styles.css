@@ -1,0 +1,23 @@
+#itemDiv > div {
+  background-color: lightgrey;
+  border: solid black;
+  height:25vh;
+}
+
+#itemDiv > div:hover {
+  background-color: lightblue;
+  border: solid black;
+}
+
+#itemDiv > div:active {
+    background-color: grey;
+    border: solid black;
+}
+
+input {
+  border: solid black;
+}
+
+hr {
+  border: solid black 1px;
+}
