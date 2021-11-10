@@ -1,8 +1,52 @@
-﻿@model CarDealershipApp.Models.Queries.ModelQueryItem
+﻿@model CarDealershipApp.ViewModels.ModelViewModel
 
 @{
-    ViewBag.Title = "Models";
+    ViewBag.Title = "Add Model";
 }
-
+ 
 <h2>Models</h2>
 
+@using (Html.BeginForm("ModelInsert", "Admin", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="col-md-12">
+        <div class="form-group col-md-5">
+            <label class="col-md-4">New Model: </label>
+            @Html.TextBoxFor(m=>m.ModelToAdd.ModelName, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-5">
+            <label class="col-md-4">Model: </label>
+            @Html.DropDownListFor(m => m.ModelToAdd.MakeID, ViewBag.Makes as List<SelectListItem>, "-Select Make", new { @class = "form-control", onchange="myFunction()" })
+        </div>
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+}
+<div id="content"></div>
+
+
+@section scripts 
+     {
+    <script>
+        $('#ModelToAdd_MakeID').change(function () {
+            var id = $("#ModelToAdd_MakeID").val();
+            @foreach(var item in Model.Models)
+            {
+               
+        
+                     <text>$("#content").append("<p>@item.ModelName</p>")</text>
+        
+
+
+            }
+
+        })
+
+        function myFunction() {
+            alert("inline worked.");
+        }
+    </script>
+
+     }

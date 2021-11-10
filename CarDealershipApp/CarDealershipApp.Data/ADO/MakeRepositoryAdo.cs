@@ -27,7 +27,7 @@ namespace CarDealershipApp.Data.ADO
                 cmd.Parameters.Add(param);
                 cmd.Parameters.AddWithValue("@MakeName", make.MakeName);
                 cmd.Parameters.AddWithValue("@UserEmail", make.UserEmail);
-                cmd.Parameters.AddWithValue("@Date", date);
+                cmd.Parameters.AddWithValue("@DateAdded", date);
 
                 cn.Open();
 

@@ -131,8 +131,9 @@ GO
 
 CREATE PROCEDURE ModelsSelectAll AS
 
-	SELECT ModelID, MakeID, ModelName, DateAdded, UserEmail
+	SELECT Models.ModelID, Models.MakeID, Models.ModelName, Models.DateAdded, Models.UserEmail, Makes.MakeName
 	FROM Models
+	JOIN Makes ON Makes.MakeID = Models.ModelID
 Go
 
 CREATE PROCEDURE ModelInsert (

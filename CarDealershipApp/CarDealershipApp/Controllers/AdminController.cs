@@ -1,4 +1,5 @@
 ﻿using CarDealershipApp.Data.ADO;
+using CarDealershipApp.Data.Factories;
 using CarDealershipApp.Models;
 using CarDealershipApp.Models.Tables;
 using CarDealershipApp.ViewModels;
@@ -37,25 +38,76 @@ namespace CarDealershipApp.Controllers
             {
                 ModelState.Clear();
             }
+            if(model.FirstName != null && model.LastName != null && model.Email != null && model.RoleName != null && model.Password != null)
+            {
+                ModelState.AddModelError("", "Error occured. Check is user name already exists.");
+            }
+            
             return View(model);
         }
 
-
-
-        [HttpPost]
+        [HttpGet]
         public ActionResult EditUser(string id)
         {
-            return View();
+            var repo = new UsersRepositoryADO();
+            List<UserWithRoleName> users = repo.GetAll();
+            UserWithRoleName user = users.FirstOrDefault(m => m.Id == id);
+            EditUserViewModel model = new EditUserViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                RoleName = user.Role,
+                Id = user.Id
+            };
+            return View(model);
         }
 
         public ActionResult Makes()
         {
-            return View();
+            var repo = MakeRepositoryFactory.GetRepository();
+            List<Make> makes = repo.GetAll();
+            MakeViewModel model = new MakeViewModel
+            {
+                Makes = makes
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult MakeInsert(MakeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Makes", "Admin");
+            }
+            model.MakeToAdd.UserEmail = User.Identity.GetUserName();
+            var repo = MakeRepositoryFactory.GetRepository();
+
+            repo.Add(model.MakeToAdd);
+
+            return RedirectToAction("Makes", "Admin");
         }
 
         public ActionResult Models()
         {
-            return View();
+            var MakesRepo = MakeRepositoryFactory.GetRepository();
+            var makes = MakesRepo.GetAll();
+            var ModelsRepo = ModelRepositoryFactory.GetRepository();
+            var models = ModelsRepo.GetAll();
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            foreach(var make in makes)
+            {
+                items.Add(new SelectListItem { Text = make.MakeName, Value = make.MakeID.ToString()});
+            }
+
+            ViewBag.Makes = items;
+            ModelViewModel viewModel = new ModelViewModel();
+            Model modelToAdd = new Model();
+            viewModel.Models = models;
+            viewModel.ModelToAdd = modelToAdd;
+
+            return View(viewModel);
         }
 
         public ActionResult Specials()

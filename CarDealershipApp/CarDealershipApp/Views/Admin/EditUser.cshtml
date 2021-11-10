@@ -1,8 +1,66 @@
-﻿@model CarDealershipApp.Models.Tables.UserWithRoleName
+﻿@model CarDealershipApp.Models.EditUserViewModel
 
 @{
     ViewBag.Title = "EditUser";
 }
 
-<h2>EditUser</h2>
+<h2>Edit User</h2>
+
+<div class="container">
+    @using (Html.BeginForm("EditUser", "Account", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id);
+        <div class="col-md-12">
+            <div class="form-group col-md-6">
+                <label> First Name: </label>
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</span>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Last Name: </label>
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group col-md-6">
+                <label>Email: </label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group col-md-6">
+                <label>Role: </label>
+                @Html.DropDownListFor(m => m.RoleName,
+                new List<SelectListItem>
+                 {
+                     new SelectListItem { Text="Admin", Value="admin" },
+                     new SelectListItem { Text="Sales", Value="sales"},
+                     new SelectListItem { Text="Disabled", Value="disabled"}
+                },
+                    
+                    new { @class = "form-control" }
+                )
+                @Html.ValidationMessageFor(m => m.RoleName)
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group col-md-6">
+                <label>Password: </label>
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group col-md-6">
+                <label>Confirm Password: </label>
+                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+</div>
 
