@@ -1,0 +1,30 @@
+﻿@model List<CarDealershipApp.Models.Tables.UserWithRoleName>
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+<p>@Html.ActionLink("Add User", "AddUser", "Admin")</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Role</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>@Html.ActionLink("Edit", "EditUser", "Admin", new { id = user.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

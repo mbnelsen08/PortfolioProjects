@@ -1,0 +1,6 @@
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\bin\Debug\FlooringMaster.Models.dll
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\bin\Debug\FlooringMaster.Models.pdb
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\obj\Debug\FlooringMastery.Models.csproj.AssemblyReference.cache
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\obj\Debug\FlooringMastery.Models.csproj.CoreCompileInputs.cache
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\obj\Debug\FlooringMaster.Models.dll
+C:\Users\Mark and Emma's PC\source\repos\FlooringMasteryAssessment\FlooringMaster.Models\obj\Debug\FlooringMaster.Models.pdb

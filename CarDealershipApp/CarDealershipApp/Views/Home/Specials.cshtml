@@ -1,0 +1,25 @@
+﻿@model  CarDealershipApp.ViewModels.HomeViewModel
+
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h2>Specials</h2>
+
+@foreach(var special in Model.Specials)
+            {
+                <div  class="container" >
+                    <div class="row" style="border: solid; margin: 10px; padding: 5px;">
+                        <div class="col-xs-1 col-sm-1 col-md-1" style="text-align: center;">
+                            <img style="height: 100px; " src="@Url.Content("~/Images/dollar-sign-16975.png")" />
+                        </div>
+                        <div class="col-xs-11 col-sm-11 col-md-11">
+                            <h3>@special.Title</h3>
+                            <p>@special.Description</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            }
+

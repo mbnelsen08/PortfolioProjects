@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sales</h2>
+
+<div class="container" style="border: solid;" id="UsedSearchBar">
+    <div class="conatiner" style="display: flex; justify-content: left;"><h3>Quick Search</h3></div>
+    <form class="form-inline container" style="display: flex; justify-content:center;">
+        <div class=" form-group col-md-4">
+            <input class="form-control" type="text" id="searchText" style="width:100%" />
+        </div>
+
+        <div class="form-group  col-md-4">
+            <label for="minPrice">Price: </label>
+            <select class="form-control" id="minPrice">
+                <option selected value=0>No Min</option>
+                <option value=5000>5,000</option>
+                <option value=10000>10,000</option>
+                <option value=15000>15,000 </option>
+                <option value=20000>20,000</option>
+                <option value=25000>25,000</option>
+                <option value=30000>30,000</option>
+                <option value=35000>35,000</option>
+                <option value=40000>40,000</option>
+                <option value=45000>45,000</option>
+                <option value=50000>50,000</option>
+                <option value=55000>55,000</option>
+                <option value=60000>60,000</option>
+                <option value=65000>65,000</option>
+                <option value=70000>70,000</option>
+            </select>
+            <select class="form-control" id="maxPrice">
+                <option selected value=100000000>No Max</option>
+                <option value=5000>5,000</option>
+                <option value=10000>10,000</option>
+                <option value=15000>15,000 </option>
+                <option value=20000>20,000</option>
+                <option value=25000>25,000</option>
+                <option value=30000>30,000</option>
+                <option value=35000>35,000</option>
+                <option value=40000>40,000</option>
+                <option value=45000>45,000</option>
+                <option value=50000>50,000</option>
+                <option value=55000>55,000</option>
+                <option value=60000>60,000</option>
+                <option value=65000>65,000</option>
+                <option value=70000>70,000</option>
+            </select>
+        </div>
+        <div class="form-group  col-md-4">
+            <label for="minYear">Year: </label>
+            <select class="form-control" id="minYear">
+                <option selected value=1975>No Min</option>
+                <option value=1990>1990</option>
+                <option value=1995>1995</option>
+                <option value=2000>2000</option>
+                <option value=2005>2005</option>
+                <option value=2010>2010</option>
+                <option value=2015>2015</option>
+                <option value=2020>2020</option>
+                <option value=2025>2025</option>
+            </select>
+            <select class="form-control" id="maxYear">
+                <option selected value=2025>No Max</option>
+                <option value=1990>1990</option>
+                <option value=1995>1995</option>
+                <option value=2000>2000</option>
+                <option value=2005>2005</option>
+                <option value=2010>2010</option>
+                <option value=2015>2015</option>
+                <option value=2020>2020</option>
+                <option value=2025>2025</option>
+            </select>
+        </div>
+    </form>
+    <div class="container" style="display: flex; justify-content:center; margin: 10px;">
+        <button id="searchButton" type="button" class="btn btn-primary col-md-4">Search</button>
+    </div>
+</div>
+
+<div id="contentRows" class="col-12 container"></div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            search();
+        });
+
+        function search() {
+            $('#searchButton').click(function (event) {
+                if ($("#searchText").val() != "") {
+                    var searchText = $("#searchText").val();
+                }
+                else {
+                    searchText = "NoText";
+                }
+                var minPrice = $("#minPrice").val();
+                var maxPrice = $('#maxPrice').val();
+                var minYear = $('#minYear').val();
+                var maxYear = $('#maxYear').val();
+
+                showSearch(searchText, minPrice, maxPrice, minYear, maxYear);
+
+            })
+        };
+        function showSearch(searchText, minPrice, maxPrice, minYear, maxYear) {
+
+            var contentRows = $("#contentRows");
+            contentRows.empty();
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44306/inventory/searchsales/' + searchText + '/' + minPrice + '/' + maxPrice + '/' + minYear + '/' + maxYear,
+                success: function (vehicleArray) {
+                    $.each(vehicleArray, function (index, vehicle) {
+                        var year = vehicle.Year;
+                        var make = vehicle.MakeName;
+                        var model = vehicle.ModelName;
+                        var bodyStyle = vehicle.Style;
+                        var interiorColor = vehicle.InteriorColor;
+                        var exteriorColor = vehicle.ExteriorColor;
+                        var salePrice = vehicle.SalePrice;
+                        var trans = vehicle.Type;
+                        var mileage = vehicle.Mileage;
+                        var msrp = vehicle.Msrp;
+                        var vin = vehicle.Vin;
+                        var imageFilePath = vehicle.ImageFilePath;
+                        var vehicleID = vehicle.VehicleID;
+
+
+                        var row = '<div class="row" style="border:solid; width:100%; margin: 20px auto 20px auto;">';
+                        row += '<div class="col-xs-12 col-sm-12 col-md-4"><h4>' + year + ' ' + make + ' ' + model + '</h4></div>';
+                        row += '<div class="col-xs-12 col-sm-12 col-md-8"><table style="width:100%"><tr style="height: 50px;"><td style ="text-align: center;"><strong>Body Style: </strong></td><td>' + bodyStyle + '</td><td style ="text-align: center;"><strong>Interior: </strong></td><td>' + interiorColor + '</td><td style ="text-align: center;"><strong>Sale Price: </strong></td><td>' + salePrice + '</td></tr>';
+                        row += '<tr style="height: 50px;"><td style ="text-align: center;"><strong>Trans: </strong></td><td>' + trans + '</td><td style ="text-align: center;"><strong>Mileage: </strong></td><td>' + mileage + '</td><td style ="text-align: center;"><strong>MSRP: </strong></td><td>' + msrp + '</td></tr>';
+                        row += '<tr style="height: 50px;"><td style ="text-align: center;"><strong>Color: </strong></td><td>' + exteriorColor + '</td><td style ="text-align: center;"><strong>Vin #: </strong></td><td>' + vin + '</td><td style="text-align: right;"><a href="/Sales/Purchase/' + vehicleID + '" style="background-color: #0275d8;color: white;padding: 14px 25px;text-align: center;text-decoration: none;display: inline-block;">Purchase</a></td></tr></table></div>';
+                        row += '</div>';
+                        contentRows.append(row);
+                    })
+                },
+                error: function () {
+                    alert("ajax called failed.");
+                }
+            })
+        };
+    </script>
+}

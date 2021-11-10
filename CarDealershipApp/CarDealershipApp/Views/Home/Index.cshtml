@@ -1,0 +1,31 @@
+﻿@model CarDealershipApp.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>Specials</h2>
+    
+</div>
+<hr/>
+<h3>Featured Vehicles</h3>
+<div class="row">
+    <div class="col-md-12">
+        
+        @foreach(var vehicle in Model.Vehicles)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-4" style="border: solid; text-align: center; width: 30%; margin:10px">
+                    <img src="@Url.Content("~/Images/" + vehicle.ImageFileName)" />
+                        <p>
+                            @vehicle.Year @vehicle.MakeName @vehicle.ModelName
+                        </p>
+                        <p>
+                            @vehicle.SalePrice.ToString("C")
+                        </p>
+                        <p>@Html.ActionLink("View Details", "Details", "Inventory", new { id = vehicle.VehicleID}, null)</p>
+                </div>
+            }
+    </div>
+    
+</div>

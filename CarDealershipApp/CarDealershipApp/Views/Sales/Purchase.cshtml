@@ -1,0 +1,170 @@
+﻿@using Microsoft.AspNet.Identity
+@model CarDealershipApp.ViewModels.PurchaseViewModel
+
+@{
+    ViewBag.Title = "Purchase";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Purchase Vehicle</h2>
+        
+    </div>
+</div>
+
+<div class="row" style="border: solid; padding: 10px;">
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h3>@Model.Vehicle.Year @Model.Vehicle.MakeName @Model.Vehicle.ModelName </h3>
+        <img src="@Url.Content("~/Images/" + Model.Vehicle.ImageFileName)" />
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8">
+        <table style="width: 100%">
+            <tbody>
+                <tr style="height: 50px">
+                    <td style="text-align: center; font-weight: bold;">
+                        Body Style:
+                    </td>
+                    <td>
+                        @Model.Vehicle.Style
+                    </td>
+                    <td style="text-align: center; font-weight: bold;">
+                        Interior:
+                    </td>
+                    <td>
+                        @Model.Vehicle.InteriorColor
+                    </td>
+                    <td style="text-align: center; font-weight: bold;">
+                        Sale Price:
+                    </td>
+                    <td>
+                        @Model.Vehicle.SalePrice.ToString("c")
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td style="text-align: center; font-weight: bold;">
+                        Trans:
+                    </td>
+                    <td>
+                        @Model.Vehicle.Type
+                    </td>
+                    <td style="text-align: center; font-weight: bold; ">
+                        Mileage:
+                    </td>
+                    <td>
+                        @Model.Vehicle.Mileage
+                    </td>
+                    <td style="text-align: center; font-weight: bold;">
+                        MSRP:
+                    </td>
+                    <td>
+                        @Model.Vehicle.Msrp.ToString("c")
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td style="text-align: center; font-weight: bold;">
+                        Color:
+                    </td>
+                    <td>
+                        @Model.Vehicle.ExteriorColor
+                    </td>
+                    <td style="text-align: center; font-weight: bold;">
+                        Vin#:
+                    </td>
+                    <td>
+                        @Model.Vehicle.Vin
+                    </td>
+                </tr>
+                <tr style="height: 100px">
+                    <td style="text-align: center; vertical-align: top; font-weight: bold;">Description:</td>
+                    <td colspan="5">@Model.Vehicle.Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Sales Information</h2>
+    </div>
+</div>
+<div class="container">
+    @using (Html.BeginForm("SavePurchase", "Sales", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.Sale.Vin, new { Value = Model.Vehicle.Vin });
+        @Html.HiddenFor(m => m.Sale.VehicleID, new { Value = Model.Vehicle.VehicleID });
+
+        <div class="form-group">
+            <label>Name: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerName, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerName)</span>
+        </div>
+        <div class="form-group">
+            <label>Phone: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerPhone, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Email: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerEmail, new { @class = "form-control", type = "Email"})
+        </div>
+        <div class="form-group">
+            <label>Street 1: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerAddress1, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerAddress1)</span>
+        </div>
+        <div class="form-group">
+            <label>Street 2: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerAddress2, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerAddress2)</span>
+        </div>
+        <div class="form-group">
+            <label>City: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerCity, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerCity)</span>
+        </div>
+        <div class="form-group">
+            <label>State: </label>
+            @Html.DropDownListFor(m => m.Sale.StateID,
+            new List<SelectListItem>
+             {
+                 new SelectListItem { Text="SD", Value="1" },
+                 new SelectListItem { Text="MN", Value="2"},
+                 new SelectListItem { Text="OH", Value="3"},
+                 new SelectListItem { Text="KY", Value="4"},
+                 new SelectListItem { Text="IA", Value="5"},
+            },
+                "- Select State -",
+                new { @class = "form-control" }
+            )
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.StateID)</span>
+        </div>
+        <div class="form-group">
+            <label>Zipcode: </label>
+            @Html.TextBoxFor(m => m.Sale.CustomerZipcode, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerZipcode)</span>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label>Purchase Price: </label>
+            @Html.TextBoxFor(m => m.Sale.PurchasePrice, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.PurchasePrice)</span>
+        </div>
+        <div class="form-group">
+            <label>Purchase Type: </label>
+            @Html.DropDownListFor(m => m.Sale.PurchaseTypeID,
+            new List<SelectListItem>
+             {
+                 new SelectListItem { Text="Bank Finance", Value="1" },
+                 new SelectListItem { Text="Cash", Value="2"},
+                 new SelectListItem { Text="Dealer Finance", Value="3"},
+            },
+                "- Select Type -",
+                new { @class = "form-control" }
+            )
+            <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.PurchaseTypeID)</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</div>
+

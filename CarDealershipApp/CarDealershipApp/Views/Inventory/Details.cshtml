@@ -1,0 +1,95 @@
+﻿@model CarDealershipApp.Models.Tables.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Vehicle Details</h2>
+    </div>
+</div>
+
+<div class="row" style="border: solid; padding: 10px;">
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h3>@Model.Year @Model.MakeName @Model.ModelName </h3>
+        <img src="@Url.Content("~/Images/" + Model.ImageFileName)" />
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8">
+        <table style="width: 100%">
+            <tbody>
+                <tr style="height: 50px">
+                    <td style ="text-align: center; font-weight: bold;">
+                        Body Style: 
+                    </td>
+                    <td>
+                        @Model.Style
+                    </td>
+                    <td style ="text-align: center; font-weight: bold;">
+                        Interior: 
+                    </td>
+                    <td>
+                        @Model.InteriorColor
+                    </td>
+                    <td style ="text-align: center; font-weight: bold;">
+                        Sale Price:
+                    </td>
+                    <td>
+                        @Model.SalePrice.ToString("c")
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td style ="text-align: center; font-weight: bold;">
+                        Trans: 
+                    </td>
+                    <td>
+                        @Model.Type
+                    </td>
+                    <td style ="text-align: center; font-weight: bold; ">
+                        Mileage:
+                    </td>
+                    <td>
+                        @Model.Mileage
+                    </td>
+                    <td style ="text-align: center; font-weight: bold;">
+                        MSRP: 
+                    </td>
+                    <td>
+                        @Model.Msrp.ToString("c")
+                    </td>
+                </tr>
+                <tr style="height: 50px">
+                    <td style ="text-align: center; font-weight: bold;">
+                        Color: 
+                    </td>
+                    <td>
+                        @Model.ExteriorColor
+                    </td>
+                    <td style ="text-align: center; font-weight: bold;">
+                        Vin#: 
+                    </td>
+                    <td>
+                        @Model.Vin
+                    </td>
+                </tr>
+                <tr style="height: 100px">
+                    <td style ="text-align: center; vertical-align: top; font-weight: bold;">Description:</td>
+                    <td colspan="5">@Model.Description</td>
+                </tr>
+                <tr>
+                    @if (Model.Sold == false)
+                    {
+                    <td colspan="6" style="text-align: right;"><text style="background-color: #5bc0de; color: white; padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block;">@Html.ActionLink("Contact", "Contact", "Home", new { Vin = (int?)Model.Vin }, null)</text></td>
+                    }
+                    else
+                    {
+                        <td colspan="6" style="text-align: right;"><button class="btn btn-primary">Unavailable- Sold</button></td>
+                    };
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
