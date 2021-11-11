@@ -22,8 +22,6 @@ namespace CarDealershipApp.Data.ADO
                 SqlParameter param = new SqlParameter("@SpecialID", SqlDbType.Int);
                 param.Direction = ParameterDirection.Output;
 
-                DateTime date = DateTime.Now;
-
                 cmd.Parameters.Add(param);
                 cmd.Parameters.AddWithValue("@Title", special.Title);
                 cmd.Parameters.AddWithValue("@Description", special.Description);
@@ -38,7 +36,20 @@ namespace CarDealershipApp.Data.ADO
 
         public void Delete(int specialID)
         {
-            throw new NotImplementedException();
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("SpecialDelete", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                cmd.Parameters.AddWithValue("@SpecialID", specialID);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                
+            }
         }
 
         public List<Special> GetAll()

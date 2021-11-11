@@ -13,6 +13,34 @@ namespace CarDealershipApp.Data.ADO
 {
     public class VehicleRepositoryAdo : IVehicleRepository
     {
+        public List<InventoryReportItem> GetInventoryReport()
+        {
+            List<InventoryReportItem> report = new List<InventoryReportItem>();
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("InventoryReport", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        InventoryReportItem currentRow = new InventoryReportItem();
+                        currentRow.Year = (int)dr["Year"];
+                        currentRow.MakeName = dr["MakeName"].ToString();
+                        currentRow.ModelName = dr["ModelName"].ToString();
+                        currentRow.StockValue = (decimal)dr["StockValue"];
+                        currentRow.Count = (int)dr["Count"];
+                        currentRow.NewOld = (bool)dr["NewOld"];
+
+                        report.Add(currentRow);
+                    }
+                }
+            }
+            return report;
+        }
         public void Add(Vehicle vehicle)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))

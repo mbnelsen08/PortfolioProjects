@@ -110,9 +110,46 @@ namespace CarDealershipApp.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ModelInsert(ModelViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Models", "Admin");
+            }
+            model.ModelToAdd.UserEmail = User.Identity.GetUserName();
+            var repo = ModelRepositoryFactory.GetRepository();
+
+            repo.Add(model.ModelToAdd);
+            return RedirectToAction("Models", "Admin");
+        }
+
         public ActionResult Specials()
         {
-            return View();
+            var repo = SpecialsRepositoryFactory.GetRepository();
+            SpecialsAdminViewModel model = new SpecialsAdminViewModel();
+
+            model.Specials = repo.GetAll();
+
+            return View(model);
+        }
+
+        
+        public ActionResult SpecialDelete(int id)
+        {
+            var repo = SpecialsRepositoryFactory.GetRepository();
+            repo.Delete(id);
+            return RedirectToAction("Specials", "Admin");
+        }
+
+        public ActionResult SpecialInsert(SpecialsAdminViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Specials", "Admin");
+            }
+            var repo = SpecialsRepositoryFactory.GetRepository();
+            repo.Add(model.SpecialToAdd);
+            return RedirectToAction("Specials", "Admin");
         }
     }
 }

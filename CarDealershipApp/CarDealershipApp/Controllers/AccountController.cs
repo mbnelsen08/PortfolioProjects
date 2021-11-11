@@ -76,8 +76,8 @@ namespace CarDealershipApp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
-
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -214,6 +214,14 @@ namespace CarDealershipApp.Controllers
                 var role = UserManager.GetRoles(user.Id);
                 UserManager.RemoveFromRoles(user.Id, role.ToArray());
                 UserManager.AddToRole(user.Id, model.RoleName);
+            }
+            if(UserManager.IsInRole(user.Id, "disabled"))
+            {
+                user.LockoutEndDateUtc = DateTime.MaxValue;
+            }
+            else
+            {
+                user.LockoutEndDateUtc = null;
             }
             UserManager.Update(user);
             return RedirectToAction("Users", "Admin");

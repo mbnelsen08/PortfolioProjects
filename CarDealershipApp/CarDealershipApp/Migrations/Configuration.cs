@@ -41,7 +41,8 @@ namespace CarDealershipApp.Migrations
                 UserName = "admin@dealership.com",
                 Email = "admin@dealership.com",
                 LastName = "Admin",
-                FirstName = "User"
+                FirstName = "User",
+                LockoutEnabled = true
             };
 
             var user2 = new ApplicationUser()
@@ -49,7 +50,8 @@ namespace CarDealershipApp.Migrations
                 UserName = "sales@dealership.com",
                 Email = "sales@dealership.com",
                 LastName = "Sales",
-                FirstName = "User"
+                FirstName = "User",
+                LockoutEnabled = true
             };
 
             var user3 = new ApplicationUser()
@@ -57,7 +59,9 @@ namespace CarDealershipApp.Migrations
                 UserName = "disabled@dealership.com",
                 Email = "disabled@dealership.com",
                 LastName = "Disabled",
-                FirstName = "User"
+                FirstName = "User",
+                LockoutEnabled = true,
+                LockoutEndDateUtc = DateTime.Parse("1/1/2100")
             };
 
             // create the user with the manager class

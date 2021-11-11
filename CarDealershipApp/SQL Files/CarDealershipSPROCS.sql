@@ -82,6 +82,9 @@ GO
 DROP PROCEDURE IF EXISTS dbo.VehiclePurchase
 GO
 
+DROP PROCEDURE IF EXISTS dbo.InventoryReport
+GO
+
 CREATE PROCEDURE StatesSelectAll AS
 
 	SELECT StateID, StateAbv
@@ -133,7 +136,7 @@ CREATE PROCEDURE ModelsSelectAll AS
 
 	SELECT Models.ModelID, Models.MakeID, Models.ModelName, Models.DateAdded, Models.UserEmail, Makes.MakeName
 	FROM Models
-	JOIN Makes ON Makes.MakeID = Models.ModelID
+	JOIN Makes ON Makes.MakeID = Models.MakeID
 Go
 
 CREATE PROCEDURE ModelInsert (
@@ -539,18 +542,20 @@ CREATE PROCEDURE VehicleSearchUsed (
 GO
 
 CREATE PROCEDURE SalesSearch (
-	@UserID varchar(100),
+	@UserName varchar(100),
 	@MinDate Date,
 	@MaxDate Date )
 AS
-	SELECT @UserID = '%'+@UserID+'%'
-	SELECT DISTINCT Sales.UserID,
+	SELECT @UserName = '%'+@UserName+'%'
+	SELECT DISTINCT Sales.[User],
 		COUNT(Sales.SaleID) AS SalesPerUser,
-		Sales.[User],
+		AspNetUsers.FirstName,
+		AspNetUsers.LastName,
 		SUM(Sales.PurchasePrice) AS TotalSales
 	FROM Sales
-	WHERE Sales.UserID LIKE @UserID
-	GROUP BY Sales.UserID, Sales.[User]
+	JOIN AspNetUsers ON AspNetUsers.Email = Sales.[User]
+	WHERE Sales.[User] LIKE @UserName
+	GROUP BY AspNetUsers.FirstName, AspNetUsers.LastName, Sales.[User]
 GO
 
 CREATE PROCEDURE UsersSelectAll AS
@@ -559,4 +564,21 @@ SELECT	*
 FROM AspNetUsers
 JOIN AspNetUserRoles ON AspNetUserRoles.UserId = AspNetUsers.Id
 JOIN AspNetRoles ON AspNetRoles.Id = AspNetUserRoles.RoleId
+GO
+
+CREATE PROCEDURE InventoryReport AS
+
+SELECT Count (Vehicles.ModelID) AS [Count],
+Vehicles.[Year],
+Makes.MakeName,
+Models.ModelName,
+SUM(Vehicles.Msrp) AS StockValue,
+Vehicles.NewOld
+FROM
+Vehicles
+JOIN Makes ON Vehicles.MakeID = Makes.MakeID
+JOIN Models ON Vehicles.ModelID = Models.ModelID
+WHERE Vehicles.Sold = 0
+GROUP BY Vehicles.[Year], Makes.MakeName, Models.ModelName, Vehicles.NewOld
+ORDER BY Vehicles.[Year] desc
 GO

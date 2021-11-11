@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CarDealershipApp.Data.Factories;
+using CarDealershipApp.Models.Queries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,12 +16,16 @@ namespace CarDealershipApp.Controllers
             return View();
         }
 
-        public ActionResult Sales()
+        public ActionResult Inventory()
         {
-            return View();
+            List<InventoryReportItem> report = new List<InventoryReportItem>();
+            var repo = VehicleRepositoryFactory.GetRepository();
+            report = repo.GetInventoryReport();
+
+            return View(report);
         }
 
-        public ActionResult Inventory()
+        public ActionResult Sales()
         {
             return View();
         }

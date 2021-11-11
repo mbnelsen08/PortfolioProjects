@@ -1,8 +1,65 @@
-﻿@model CarDealershipApp.Models.Queries.InventoryReportItem
+﻿@model List<CarDealershipApp.Models.Queries.InventoryReportItem>
 
 @{
     ViewBag.Title = "Inventory";
 }
 
 <h2>Inventory</h2>
+
+<h4>New Vehicles</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Year</td>
+            <td>Make</td>
+            <td>Model</td>
+            <td>Count</td>
+            <td>Stock Value</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in @Model)
+        {
+            if (row.NewOld)
+            {
+                <tr>
+                    <td>@row.Year</td>
+                    <td>@row.MakeName</td>
+                    <td>@row.ModelName</td>
+                    <td>@row.Count</td>
+                    <td>@row.StockValue.ToString("C");</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h4>Used Vehicles</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Year</td>
+            <td>Make</td>
+            <td>Model</td>
+            <td>Count</td>
+            <td>Stock Value</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in @Model)
+        {
+            if (!row.NewOld)
+            {
+                <tr>
+                    <td>@row.Year</td>
+                    <td>@row.MakeName</td>
+                    <td>@row.ModelName</td>
+                    <td>@row.Count</td>
+                    <td>@row.StockValue.ToString("C")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
 

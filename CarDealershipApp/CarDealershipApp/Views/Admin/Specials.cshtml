@@ -1,8 +1,46 @@
-﻿@model CarDealershipApp.Models.Tables.Special
+﻿@model CarDealershipApp.ViewModels.SpecialsAdminViewModel
 
 @{
     ViewBag.Title = "Specials";
 }
 
 <h2>Specials</h2>
+<div class="container">
+@using (Html.BeginForm("SpecialInsert", "Admin", FormMethod.Post, new {@class = "row"  }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="col-md-4">
+        <div class="form-group col-md-12">
+            <label class="col-md-4">Title: </label>
+            @Html.TextBoxFor(m => m.SpecialToAdd.Title, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-12">
+            <label class="col-md-4">Description: </label>
+           @Html.TextAreaFor(m=>m.SpecialToAdd.Description, new { @class = "form-control"})
+        </div>
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-primary" >Add</button>
+        </div>
+    </div>
+}
+
+@foreach (var special in Model.Specials)
+{
+    
+        <div class="row" style="border: solid; margin: 10px; padding: 5px;">
+            <div class="col-xs-1 col-sm-1 col-md-1" style="text-align: center;">
+                <img class="img-fluid" style="max-width: 100%; height:auto" src="@Url.Content("~/Images/dollar-sign-16975.png")" />
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10">
+                <h3>@special.Title</h3>
+                <p>@special.Description</p>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1" style="text-align: center;">
+                <button type="button" class="btn btn-outline-danger">@Html.ActionLink("Delete", "SpecialDelete", "Admin", new { id = special.SpecialID }, new { onclick = "return confirm('Are you sure?');" })</button>
+            </div>
+        </div>
+}
+</div>
+
 

@@ -20,5 +20,6 @@ namespace CarDealershipApp.Data.Interfaces
         void Update(Vehicle vehicle);
         void Delete(int vehicleID);
         void Purchase(int vehicleID);
+        List<InventoryReportItem> GetInventoryReport();
     }
 }

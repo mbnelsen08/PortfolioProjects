@@ -7,3 +7,12 @@ C:\Users\Mark and Emma's PC\Documents\online-net-2021-mbnelsen08\Classwork\CarDe
 C:\Users\Mark and Emma's PC\Documents\online-net-2021-mbnelsen08\Classwork\CarDealershipApp\CarDealershipApp.Models\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mark and Emma's PC\Documents\online-net-2021-mbnelsen08\Classwork\CarDealershipApp\CarDealershipApp.Models\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Mark and Emma's PC\Documents\online-net-2021-mbnelsen08\Classwork\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.csproj.CopyComplete
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\bin\Debug\CarDealershipApp.Models.dll
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\bin\Debug\CarDealershipApp.Models.pdb
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.csproj.AssemblyReference.cache
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.csproj.CoreCompileInputs.cache
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.csproj.CopyComplete
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.dll
+C:\Users\Mark and Emma's PC\Documents\PortfolioProjects\PortfolioProjects\CarDealershipApp\CarDealershipApp.Models\obj\Debug\CarDealershipApp.Models.pdb

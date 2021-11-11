@@ -17,36 +17,31 @@
         </div>
         <div class="form-group col-md-5">
             <label class="col-md-4">Model: </label>
-            @Html.DropDownListFor(m => m.ModelToAdd.MakeID, ViewBag.Makes as List<SelectListItem>, "-Select Make", new { @class = "form-control", onchange="myFunction()" })
+            @Html.DropDownListFor(m => m.ModelToAdd.MakeID, ViewBag.Makes as List<SelectListItem>, "-Select Make", new { @class = "form-control", onchange="myFunction(this.value)" })
         </div>
         <div class="form-group col-md-2">
             <button type="submit" class="btn btn-primary">Add</button>
         </div>
     </div>
 }
-<div id="content"></div>
-
-
-@section scripts 
-     {
-    <script>
-        $('#ModelToAdd_MakeID').change(function () {
-            var id = $("#ModelToAdd_MakeID").val();
-            @foreach(var item in Model.Models)
-            {
-               
-        
-                     <text>$("#content").append("<p>@item.ModelName</p>")</text>
-        
-
-
-            }
-
-        })
-
-        function myFunction() {
-            alert("inline worked.");
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Model</td>
+            <td>Make</td>
+            <td>Date Added</td>
+            <td>User</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in @Model.Models)
+        {
+        <tr>
+            <td>@car.ModelName</td>
+            <td>@car.MakeName</td>
+            <td>@car.DateAdded.ToShortDateString()</td>
+            <td>@car.UserEmail</td>
+        </tr>
         }
-    </script>
-
-     }
+    </tbody>
+</table>

@@ -253,21 +253,7 @@ namespace CarDealershipApp.Tests.Integration_Tests
             Assert.AreEqual(5, models.Count);
         }
 
-        [Test]
-        public void CanSearchUsedVehicles()
-        {
-            var repo = new VehicleRepositoryAdo();
-
-            string searchText = "";
-            decimal minPrice = 0;
-            decimal maxPrice = 40000;
-            int minYear = 2010;
-            int maxYear = 2030;
-
-            var models = repo.SearchUsed(searchText, minPrice, maxPrice, minYear, maxYear);
-
-            Assert.AreEqual(3, models.Count);
-        }
+        
 
         [Test]
         public void CanSearchSales()
@@ -298,6 +284,19 @@ namespace CarDealershipApp.Tests.Integration_Tests
 
             Assert.AreEqual(2, vehicles.Count);
             Assert.AreEqual("Nissan", vehicles[0].MakeName);
+        }
+
+        [Test]
+        public void CanGetInventoryReport()
+        {
+            var repo = new VehicleRepositoryAdo();
+            List<InventoryReportItem> report = new List<InventoryReportItem>();
+
+            report = repo.GetInventoryReport();
+
+            Assert.AreEqual(3, report.Count);
+            Assert.AreEqual(report[0].MakeName, "Nissan");
+            Assert.AreEqual(report[0].NewOld, true);
         }
     }
 }

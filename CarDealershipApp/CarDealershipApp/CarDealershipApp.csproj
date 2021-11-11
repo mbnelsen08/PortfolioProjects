@@ -208,6 +208,7 @@
     <Compile Include="ViewModels\MakeViewModel.cs" />
     <Compile Include="ViewModels\ModelViewModel.cs" />
     <Compile Include="ViewModels\PurchaseViewModel.cs" />
+    <Compile Include="ViewModels\SpecialsAdminViewModel.cs" />
     <Compile Include="ViewModels\UsersAdminViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

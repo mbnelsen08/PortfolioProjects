@@ -28,7 +28,7 @@ namespace CarDealershipApp.Data.ADO
                 cmd.Parameters.AddWithValue("@ModelName", model.ModelName);
                 cmd.Parameters.AddWithValue("@MakeID", model.MakeID);
                 cmd.Parameters.AddWithValue("@UserEmail", model.UserEmail);
-                cmd.Parameters.AddWithValue("@Date", date);
+                cmd.Parameters.AddWithValue("@DateAdded", date);
 
                 cn.Open();
 
@@ -59,6 +59,7 @@ namespace CarDealershipApp.Data.ADO
                         currentRow.MakeID = (int)dr["MakeID"];
                         currentRow.ModelName = dr["ModelName"].ToString();
                         currentRow.UserEmail = dr["UserEmail"].ToString();
+                        currentRow.MakeName = dr["MakeName"].ToString();
                         currentRow.DateAdded = (DateTime)dr["DateAdded"];
 
                         models.Add(currentRow);
