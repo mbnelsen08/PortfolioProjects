@@ -5,7 +5,9 @@ namespace DrakkenheimEncountersBot.Repos
 {
     public class EncounterRepo
     {
+#pragma warning disable IDE1006 // Naming Styles
         private static List<Encounter> Encounters = new List<Encounter>
+#pragma warning restore IDE1006 // Naming Styles
         {
             new Encounter {ID = 1,Location="outer-inner", MonsterType = "academy", Name = "Academy Surveyor", Description = "An Amethyst Academy mage and several apprentices are conducting research in the ruins."},
             new Encounter {ID = 2,Location="outer", MonsterType = "monster", Name = "Angry Furniture", Description = "Mimics are disguesed as perfectly normal pices of furniture in a nearby house."},
