@@ -44,6 +44,20 @@ namespace DrakkenheimEncountersBot.Commands
             Encounter encounter = new Encounter();
             List<Encounter> encounters = new List<Encounter>();
 
+            // Switch Expressions (as opposed to switch case statements)
+            // This is a way you can use pattern matching as an expression rather than as a statement.
+            // My preferred way of doing the logic you have below.
+            // The '_' means 'all other cases not explicitly covered'
+            // All cases must return the same type, in this case, List<Encounter>
+            // We can then use the variable later however we want.
+            // 
+            //var switchExpression = location switch
+            //{
+            //    "sewers" => repo.GetSewerEncounters(),
+            //    "inner" => repo.GetInnerEncounters(),
+            //    "outer" => repo.GetOuterEncounters(),
+            //    _ => Array.Empty<Encounter>().ToList(),
+            //};
 
             switch (location)
             {
